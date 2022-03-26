@@ -4,9 +4,9 @@ module.exports = class RockPaperScissor {
   constructor() {
     this.prompt = inquirer.createPromptModule();
     this.moves = [
-      { name: "Rock", value: "rock" },
-      { name: "Paper", value: "paper" },
-      { name: "Scissors", value: "scissors" },
+      { name: "👊", value: "rock" },
+      { name: "✋", value: "paper" },
+      { name: "✌", value: "scissors" },
     ];
     this.rules = {
       rock: "scissors",

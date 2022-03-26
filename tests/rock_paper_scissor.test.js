@@ -1,5 +1,4 @@
 const RockPaperScissor = require("../rock_paper_scissor.js");
-const inquirer = require("inquirer");
 const { expect } = require("@jest/globals");
 
 const game = new RockPaperScissor();
