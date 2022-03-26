@@ -14,7 +14,6 @@ module.exports = class RockPaperScissor {
       paper: "rock",
     };
   }
-  y;
 
   newGame() {
     this.prompt({
@@ -55,15 +54,22 @@ module.exports = class RockPaperScissor {
     let player1Label = "";
     let player1Move = "";
     let computerMove = this.randomMove();
-    console.log(computerMove);
     if (gameOption === "p_vs_c") {
       player1Move = await this.getUserMove();
       player1Label = "You";
+    } else if (gameOption === "c_vs_c") {
+      player1Move = this.randomMove();
+      player1Label = "Computer 1";
+    }
+    if (player1Move === "") {
+      console.log("Something went wrong. Please try again.");
+      process.exit();
     }
 
     let winner = this.getWinner(player1Move, computerMove, player1Label);
 
     this.printResult(winner, player1Label, player1Move, computerMove);
+    this.newGame();
   }
 
   getWinner(player1Move, computerMove, player1Label) {
@@ -94,11 +100,7 @@ module.exports = class RockPaperScissor {
       type: "list",
       name: "move",
       message: "Choose your move.",
-      choices: [
-        { name: "Rock", value: "rock" },
-        { name: "Paper", value: "paper" },
-        { name: "Scissors", value: "scissors" },
-      ],
+      choices: this.moves,
     });
     return new Promise((resolve, reject) => {
       resolve(answer.move);
