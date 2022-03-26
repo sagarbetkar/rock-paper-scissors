@@ -87,7 +87,7 @@ module.exports = class RockPaperScissor {
 
   printResult(winner, player1Label, player1Move, computerMove) {
     console.log(
-      `${player1Label}(${player1Move}) vs Computer(${computerMove}) \n Winner: ${winner}. `
+      `${player1Label}(${player1Move}) vs Computer(${computerMove}) \n Winner: ${winner}.`
     );
   }
 
