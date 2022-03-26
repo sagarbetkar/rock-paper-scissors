@@ -1,0 +1,26 @@
+{
+  "name": "rock-paper-scissors",
+  "version": "1.0.0",
+  "description": "An interactive CLI rock-paper-scissor game",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sagarbetkar/rock-paper-scissors.git"
+  },
+  "keywords": [
+    "rock-paper-scissor-game"
+  ],
+  "author": "sagar betkar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sagarbetkar/rock-paper-scissors/issues"
+  },
+  "homepage": "https://github.com/sagarbetkar/rock-paper-scissors#readme",
+  "dependencies": {
+    "inquirer": "^8.2.2",
+    "jest": "^27.5.1"
+  }
+}
