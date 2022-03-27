@@ -10,6 +10,7 @@ export default function Footer(props) {
     moves,
     mode,
     handleComputersPlay,
+    isTie,
   } = props;
   return (
     <footer className="p-2">
@@ -34,6 +35,7 @@ export default function Footer(props) {
         </div>
       )}
       {gameOver && <h1 className="m-0">Winner : {winner}</h1>}
+      {isTie && <h1 className="m-0">It's a tie</h1>}
       {gameOver && (
         <Button className="my-2" onClick={() => reset()}>
           New Game

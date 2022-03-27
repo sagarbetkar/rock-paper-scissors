@@ -32,6 +32,7 @@ function App() {
   const [winner, setWinner] = useState(null);
   const [gameOver, setGameOver] = useState(false);
   const [mode, setMode] = useState(gameMode["p_vs_c"]);
+  const [isTie, setIsTie] = useState(false);
 
   const handleOnClick = (move) => {
     setPlayerOneMove(move);
@@ -48,6 +49,7 @@ function App() {
     setPlayerTwoMove(null);
     setWinner(null);
     setGameOver(false);
+    setIsTie(false);
   };
 
   const playComputer = () => {
@@ -62,17 +64,22 @@ function App() {
   };
 
   useEffect(() => {
-    if (playerOneMove === playerTwoMove) {
-      setWinner(null);
-      setGameOver(false);
-    } else if (rules[playerOneMove].some((x) => x === playerTwoMove)) {
-      setWinner(mode.player1Label);
-      setGameOver(true);
-    } else {
-      setWinner(mode.player2Label);
-      setGameOver(true);
+    if (playerOneMove !== null && playerTwoMove !== null) {
+      if (playerOneMove === playerTwoMove) {
+        setWinner(null);
+        setGameOver(false);
+        setIsTie(true);
+      } else if (rules[playerOneMove].some((x) => x === playerTwoMove)) {
+        setWinner(mode.player1Label);
+        setGameOver(true);
+        setIsTie(false);
+      } else {
+        setWinner(mode.player2Label);
+        setGameOver(true);
+        setIsTie(false);
+      }
+      return winner;
     }
-    return winner;
   }, [playerOneMove, playerTwoMove, winner, mode]);
   return (
     <div className="App">
@@ -94,6 +101,7 @@ function App() {
               handleOnClick={handleOnClick}
               reset={resetGame}
               handleComputersPlay={playComputer}
+              isTie={isTie}
             />
           </Col>
         </Row>
