@@ -5,59 +5,95 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Main from "./components/Main";
 
+const rules = {
+  rock: ["scissors"],
+  scissors: ["paper"],
+  paper: ["rock"],
+};
+
+const moves = ["rock", "paper", "scissors"];
+
+const gameMode = {
+  p_vs_c: {
+    label: "PLAYER VS COMPUTER",
+    player2Label: "COMPUTER",
+    player1Label: "PLAYER",
+  },
+  c_vs_c: {
+    label: "COMPUTER VS COMPUTER",
+    player1Label: "COMPUTER 1",
+    player2Label: "COMPUTER 2",
+  },
+};
+
 function App() {
-  const [playerOneMove, setPlayerOneMove] = useState();
-  const [playerTwoMove, setplayerTwoMove] = useState();
+  const [playerOneMove, setPlayerOneMove] = useState(null);
+  const [playerTwoMove, setPlayerTwoMove] = useState(null);
   const [winner, setWinner] = useState(null);
   const [gameOver, setGameOver] = useState(false);
-
-  const moves = ["rock", "paper", "scissors"];
+  const [mode, setMode] = useState(gameMode["p_vs_c"]);
 
   const handleOnClick = (move) => {
     setPlayerOneMove(move);
-    generatePlayerTwoMove();
+    setPlayerTwoMove(generatePlayerTwoMove());
   };
 
   const generatePlayerTwoMove = () => {
     const randomSelect = moves[Math.floor(Math.random() * moves.length)];
-    setplayerTwoMove(randomSelect);
+    return randomSelect;
   };
 
   const resetGame = () => {
-    window.location.reload();
+    setPlayerOneMove(null);
+    setPlayerTwoMove(null);
+    setWinner(null);
+    setGameOver(false);
+  };
+
+  const playComputer = () => {
+    setPlayerOneMove(generatePlayerTwoMove());
+    setPlayerTwoMove(generatePlayerTwoMove());
+  };
+
+  const toggleGameMode = () => {
+    mode.label === "PLAYER VS COMPUTER"
+      ? setMode(gameMode["c_vs_c"])
+      : setMode(gameMode["p_vs_c"]);
   };
 
   useEffect(() => {
-    const rules = {
-      rock: "scissors",
-      scissors: "paper",
-      paper: "rock",
-    };
     if (playerOneMove === playerTwoMove) {
       setWinner(null);
       setGameOver(false);
-    } else if (rules[playerOneMove] === playerTwoMove) {
-      setWinner("Player One");
+    } else if (rules[playerOneMove].some((x) => x === playerTwoMove)) {
+      setWinner(mode.player1Label);
       setGameOver(true);
     } else {
-      setWinner("Computer");
+      setWinner(mode.player2Label);
       setGameOver(true);
     }
     return winner;
-  }, [playerOneMove, playerTwoMove, winner]);
+  }, [playerOneMove, playerTwoMove, winner, mode]);
   return (
     <div className="App">
       <Container>
         <Row>
           <Col>
             <Header />
-            <Main playerOneMove={playerOneMove} playerTwoMove={playerTwoMove} />
+            <Main
+              playerOneMove={playerOneMove}
+              playerTwoMove={playerTwoMove}
+              mode={mode}
+              handleGameMode={toggleGameMode}
+            />
             <Footer
+              mode={mode}
               moves={moves}
               gameOver={gameOver}
               winner={winner}
               handleOnClick={handleOnClick}
               reset={resetGame}
+              handleComputersPlay={playComputer}
             />
           </Col>
         </Row>

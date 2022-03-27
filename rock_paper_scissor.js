@@ -9,9 +9,9 @@ module.exports = class RockPaperScissor {
       { name: "✌", value: "scissors" },
     ];
     this.rules = {
-      rock: "scissors",
-      scissors: "paper",
-      paper: "rock",
+      rock: ["scissors"],
+      scissors: ["paper"],
+      paper: ["rock"],
     };
   }
 
@@ -76,7 +76,7 @@ module.exports = class RockPaperScissor {
     let winner = "";
     if (player1Move === computerMove) {
       winner = "It's a tie!";
-    } else if (this.rules[player1Move] === computerMove) {
+    } else if (rules[player1Move].some((x) => x === computerMove)) {
       winner = `${player1Label}`;
     } else {
       winner = "Computer";
