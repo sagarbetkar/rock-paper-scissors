@@ -1,3 +1,25 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
 .App {
   text-align: center;
+  height: 100vh;
 }
+
+.user-hand {
+  transform: rotateY(180deg);
+}
+
+.user-hand, .computer-hand, .empty {
+  height: 150px;
+  width: 150px;
+  border: 2px dashed #000;
+  border-radius: 50%;
+}
+
+.empty {
+		background-color: transparent;
+		border: 2px dashed #000;
+		color: #fff;
+		font-size: 30px;
+    display: inline-block;
+	}

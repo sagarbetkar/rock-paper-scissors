@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import "./App.css";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
+import Main from "./components/Main";
 
 function App() {
-  const [playerOneMove, setPlayerOneMove] = useState("rock");
-  const [playerTwoMove, setplayerTwoMove] = useState("rock");
+  const [playerOneMove, setPlayerOneMove] = useState();
+  const [playerTwoMove, setplayerTwoMove] = useState();
   const [winner, setWinner] = useState(null);
   const [gameOver, setGameOver] = useState(false);
 
@@ -20,7 +23,7 @@ function App() {
     setplayerTwoMove(randomSelect);
   };
 
-  const restartGame = () => {
+  const resetGame = () => {
     window.location.reload();
   };
 
@@ -31,8 +34,8 @@ function App() {
       paper: "rock",
     };
     if (playerOneMove === playerTwoMove) {
-      setWinner("It's a tie!");
-      setGameOver(true);
+      setWinner(null);
+      setGameOver(false);
     } else if (rules[playerOneMove] === playerTwoMove) {
       setWinner("Player One");
       setGameOver(true);
@@ -40,7 +43,6 @@ function App() {
       setWinner("Computer");
       setGameOver(true);
     }
-
     return winner;
   }, [playerOneMove, playerTwoMove, winner]);
   return (
@@ -48,49 +50,15 @@ function App() {
       <Container>
         <Row>
           <Col>
-            <h1>Rock, Paper & Scissors</h1>
-            <Container className="moves">
-              <Row className="justify-content-md-center">
-                <Col xs lg="2">
-                  <div className="playerOneMove">
-                    <img
-                      className="user-hand"
-                      src={`../images/${playerOneMove}.png`}
-                      alt=""
-                    />
-                  </div>
-                </Col>
-                <Col md="auto">vs</Col>
-                <Col xs lg="2">
-                  <div className="playerTwoMove">
-                    <img
-                      className="user-hand"
-                      src={`../images/${playerTwoMove}.png`}
-                      alt=""
-                    />
-                  </div>
-                </Col>
-              </Row>
-            </Container>
-            <div className="button-div">
-              {moves.map((move, index) => (
-                <button
-                  key={index}
-                  className="button"
-                  onClick={() => handleOnClick(move)}
-                >
-                  {move}
-                </button>
-              ))}
-            </div>
-            <div className="result">
-              <h1>Winner : {winner}</h1>
-            </div>
-            <div>
-              {gameOver && (
-                <button onClick={() => restartGame()}>Restart</button>
-              )}
-            </div>
+            <Header />
+            <Main playerOneMove={playerOneMove} playerTwoMove={playerTwoMove} />
+            <Footer
+              moves={moves}
+              gameOver={gameOver}
+              winner={winner}
+              handleOnClick={handleOnClick}
+              reset={resetGame}
+            />
           </Col>
         </Row>
       </Container>
