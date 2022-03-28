@@ -76,7 +76,7 @@ module.exports = class RockPaperScissor {
     let winner = "";
     if (player1Move === computerMove) {
       winner = "It's a tie!";
-    } else if (rules[player1Move].some((x) => x === computerMove)) {
+    } else if (this.rules[player1Move].some((x) => x === computerMove)) {
       winner = `${player1Label}`;
     } else {
       winner = "Computer";
