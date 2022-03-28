@@ -58,6 +58,7 @@ function App() {
   };
 
   const toggleGameMode = () => {
+    resetGame();
     mode.label === "PLAYER VS COMPUTER"
       ? setMode(gameMode["c_vs_c"])
       : setMode(gameMode["p_vs_c"]);

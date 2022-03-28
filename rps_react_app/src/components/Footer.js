@@ -13,9 +13,9 @@ export default function Footer(props) {
     isTie,
   } = props;
   return (
-    <footer className="p-2">
+    <footer className="mt-4">
       {mode.label === "PLAYER VS COMPUTER" ? (
-        <div className="m-2">
+        <div className="d-flex justify-content-center align-items-center">
           {moves.map((move, index) => (
             <Button
               key={index}
@@ -28,19 +28,25 @@ export default function Footer(props) {
           ))}
         </div>
       ) : (
-        <div className="m-2">
-          <Button onClick={() => handleComputersPlay()} disabled={gameOver}>
+        <div>
+          <Button
+            className="m-2"
+            onClick={() => handleComputersPlay()}
+            disabled={gameOver}
+          >
             Play
           </Button>
         </div>
       )}
-      {gameOver && <h1 className="m-0">Winner : {winner}</h1>}
-      {isTie && <h1 className="m-0">It's a tie</h1>}
-      {gameOver && (
-        <Button className="my-2" onClick={() => reset()}>
-          New Game
-        </Button>
-      )}
+      <div style={{ height: "150px" }}>
+        {gameOver && <h1 className="m-0">Winner : {winner}</h1>}
+        {isTie && <h1 className="m-0">It's a tie</h1>}
+        {gameOver && (
+          <Button className="my-2" onClick={() => reset()}>
+            New Game
+          </Button>
+        )}
+      </div>
     </footer>
   );
 }
