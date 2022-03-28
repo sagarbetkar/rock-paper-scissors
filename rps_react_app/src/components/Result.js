@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 
-export default function Footer(props) {
+export default function Result(props) {
   const {
     gameOver,
     winner,
@@ -13,7 +13,7 @@ export default function Footer(props) {
     isTie,
   } = props;
   return (
-    <footer className="mt-4">
+    <section className="mt-4">
       {mode.label === "PLAYER VS COMPUTER" ? (
         <div className="d-flex justify-content-center align-items-center">
           {moves.map((move, index) => (
@@ -47,6 +47,6 @@ export default function Footer(props) {
           </Button>
         )}
       </div>
-    </footer>
+    </section>
   );
 }

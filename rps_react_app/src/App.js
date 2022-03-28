@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import "./App.css";
-import Footer from "./components/Footer";
+import Result from "./components/Result";
 import Header from "./components/Header";
 import Main from "./components/Main";
 
@@ -39,6 +39,7 @@ function App() {
     setPlayerTwoMove(generatePlayerTwoMove());
   };
 
+  // Return Random Move
   const generatePlayerTwoMove = () => {
     const randomSelect = moves[Math.floor(Math.random() * moves.length)];
     return randomSelect;
@@ -52,11 +53,13 @@ function App() {
     setIsTie(false);
   };
 
+  // Random move selection for computers
   const playComputer = () => {
     setPlayerOneMove(generatePlayerTwoMove());
     setPlayerTwoMove(generatePlayerTwoMove());
   };
 
+  // Changing the Game Mode
   const toggleGameMode = () => {
     resetGame();
     mode.label === "PLAYER VS COMPUTER"
@@ -94,7 +97,7 @@ function App() {
               mode={mode}
               handleGameMode={toggleGameMode}
             />
-            <Footer
+            <Result
               mode={mode}
               moves={moves}
               gameOver={gameOver}
