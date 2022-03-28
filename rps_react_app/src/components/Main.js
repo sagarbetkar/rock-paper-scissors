@@ -6,7 +6,7 @@ import PlayerBox from "./PlayerBox";
 export default function Main(props) {
   const { playerOneMove, playerTwoMove, mode, handleGameMode } = props;
   return (
-    <section>
+    <div>
       <Container>
         <h5>
           {mode.player1Label} vs {mode.player2Label}
@@ -22,6 +22,6 @@ export default function Main(props) {
           </Col>
         </Row>
       </Container>
-    </section>
+    </div>
   );
 }

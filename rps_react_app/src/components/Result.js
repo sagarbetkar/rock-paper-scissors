@@ -13,7 +13,7 @@ export default function Result(props) {
     isTie,
   } = props;
   return (
-    <section className="mt-4">
+    <div className="mt-4">
       {mode.label === "PLAYER VS COMPUTER" ? (
         <div className="d-flex justify-content-center align-items-center">
           {moves.map((move, index) => (
@@ -47,6 +47,6 @@ export default function Result(props) {
           </Button>
         )}
       </div>
-    </section>
+    </div>
   );
 }
