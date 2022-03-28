@@ -4,9 +4,9 @@ module.exports = class RockPaperScissor {
   constructor() {
     this.prompt = inquirer.createPromptModule();
     this.moves = [
-      { name: "👊", value: "rock" },
-      { name: "✋", value: "paper" },
-      { name: "✌", value: "scissors" },
+      { name: "👊 (Rock)", value: "rock" },
+      { name: "✋ (Paper)", value: "paper" },
+      { name: "✌ (Scissor)", value: "scissors" },
     ];
     this.rules = {
       rock: ["scissors"],
@@ -72,6 +72,7 @@ module.exports = class RockPaperScissor {
     this.newGame();
   }
 
+  // Determine the winner
   getWinner(player1Move, computerMove, player1Label) {
     let winner = "";
     if (player1Move === computerMove) {
@@ -85,12 +86,14 @@ module.exports = class RockPaperScissor {
     return winner;
   }
 
+  // Print result
   printResult(winner, player1Label, player1Move, computerMove) {
     console.log(
       `${player1Label}(${player1Move}) vs Computer(${computerMove}) \n Winner: ${winner}.`
     );
   }
 
+  // Generate random move
   randomMove() {
     return this.moves[Math.floor(Math.random() * this.moves.length)].value;
   }
